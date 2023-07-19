@@ -8,7 +8,7 @@ function CreateToDo() {
   const [toDos, setToDos] = useRecoilState(toDoState);
   const { register, handleSubmit, setValue } = useForm<IForm>();
   const onSubmit = ({ toDo }: IForm) => {
-    setToDos((prev) => [{ id: Date.now(), text: toDo, categoty: "TO_DO" }, ...prev]);
+    setToDos((prev) => [{ id: Date.now(), text: toDo, category: "TO_DO" }, ...prev]);
     setValue("toDo", ""); //toDo input의 값을 지움
     //console.log(toDos);
   };
