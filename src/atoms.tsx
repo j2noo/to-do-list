@@ -1,11 +1,12 @@
 import { atom, selector } from "recoil";
+type categories = "DONE" | "DOING" | "TO_DO";
 export interface IToDo {
   id: number;
   text: string;
-  category: "DONE" | "DOING" | "TO_DO";
+  category: categories;
 }
 export const toDoState = atom<IToDo[]>({ key: "toDo", default: [] });
-export const categoryState = atom({ key: "category", default: "TO_DO" });
+export const categoryState = atom<categories>({ key: "category", default: "TO_DO" });
 export const todoSelector = selector({
   key: "toDoSelector",
   get: ({ get }) => {
