@@ -2,10 +2,31 @@ import { styled } from "styled-components";
 import { Categories, allCategoryState, categoryState } from "../atoms";
 import { useRecoilState } from "recoil";
 
+const SelectContainer = styled.div`
+  background-color: #ecf0f1;
+  display: flex;
+  /* justify-content: space-around; */
+  flex-wrap: wrap;
+  gap: 30px 4%;
+  & :last-child {
+    color: black;
+    background-color: #d1d1d19f;
+  }
+`;
 const CategoryTab = styled.button<{ $isSelected?: boolean }>`
-  margin: 10px;
-  padding: 10px;
+  /* margin: 10px;
+  padding: 10px; */
+  width: 22%;
+  height: 50px;
+  border: ${(props) => (props.$isSelected ? "3px solid black" : "none")};
+  border-radius: 10px;
+  font-size: 15px;
+  font-weight: bold;
   color: ${(props) => (props.$isSelected ? "red" : "blue")};
+  background-color: white;
+  &:hover {
+    border: 1px solid black;
+  }
 `;
 
 function SelectTab() {
@@ -28,7 +49,7 @@ function SelectTab() {
   }
 
   return (
-    <>
+    <SelectContainer>
       {allCategories.map((oneCategory) => (
         <CategoryTab
           key={oneCategory}
@@ -41,7 +62,7 @@ function SelectTab() {
       ))}
 
       <CategoryTab onClick={addClicked}>추가</CategoryTab>
-    </>
+    </SelectContainer>
   );
 }
 
