@@ -12,20 +12,28 @@ function SelectTab() {
   const [category, setCategory] = useRecoilState(categoryState);
   const [allCategories, setAllCategories] = useRecoilState(allCategoryState);
   function categoryClicked(event: React.MouseEvent<HTMLButtonElement>) {
-    console.log(event.currentTarget.value);
     setCategory(event.currentTarget.value as Categories);
   }
-  
+  function addClicked(event: React.MouseEvent<HTMLButtonElement>) {
+    const newCategory = prompt("새로운 카테고리를 입력하세요");
+    setAllCategories((curr) => [...curr, newCategory as string]);
+  }
+
   console.log(allCategories);
   return (
     <>
       {allCategories.map((oneCategory) => (
-        <CategoryTab isSelected={category == oneCategory} value={oneCategory} onClick={categoryClicked}>
+        <CategoryTab
+          key={oneCategory}
+          isSelected={category == oneCategory}
+          value={oneCategory}
+          onClick={categoryClicked}
+        >
           {oneCategory}
         </CategoryTab>
       ))}
-      
-      <CategoryTab>추가</CategoryTab>
+
+      <CategoryTab onClick={addClicked}>추가</CategoryTab>
     </>
   );
 }
