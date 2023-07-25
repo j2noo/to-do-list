@@ -1,8 +1,8 @@
 import { styled } from "styled-components";
-import { Categories, categoryState } from "../atoms";
+import { Categories, allCategoryState, categoryState } from "../atoms";
 import { useRecoilState } from "recoil";
 
-const CategoryTab = styled.button<{ isSelected: boolean }>`
+const CategoryTab = styled.button<{ isSelected?: boolean }>`
   margin: 10px;
   padding: 10px;
   color: ${(props) => (props.isSelected ? "red" : "blue")};
@@ -10,21 +10,22 @@ const CategoryTab = styled.button<{ isSelected: boolean }>`
 
 function SelectTab() {
   const [category, setCategory] = useRecoilState(categoryState);
+  const [allCategories, setAllCategories] = useRecoilState(allCategoryState);
   function categoryClicked(event: React.MouseEvent<HTMLButtonElement>) {
     console.log(event.currentTarget.value);
     setCategory(event.currentTarget.value as Categories);
   }
+  
+  console.log(allCategories);
   return (
     <>
-      <CategoryTab isSelected={category == Categories.TO_DO} value={Categories.TO_DO} onClick={categoryClicked}>
-        todo
-      </CategoryTab>
-      <CategoryTab isSelected={category == Categories.DOING} value={Categories.DOING} onClick={categoryClicked}>
-        doing
-      </CategoryTab>
-      <CategoryTab isSelected={category == Categories.DONE} value={Categories.DONE} onClick={categoryClicked}>
-        done
-      </CategoryTab>
+      {allCategories.map((oneCategory) => (
+        <CategoryTab isSelected={category == oneCategory} value={oneCategory} onClick={categoryClicked}>
+          {oneCategory}
+        </CategoryTab>
+      ))}
+      
+      <CategoryTab>추가</CategoryTab>
     </>
   );
 }
