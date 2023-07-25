@@ -1,5 +1,28 @@
 import { useRecoilState, useRecoilValue, useSetRecoilState } from "recoil";
 import { Categories, IToDo, allCategoryState, toDoState } from "../atoms";
+import { styled } from "styled-components";
+const ListComponent = styled.li`
+  background-color: white;
+  padding: 10px;
+  margin: 10px;
+  border-radius: 10px;
+  box-shadow: rgba(10, 10, 10, 0.1) 0px 0.3rem 0.5rem;
+  div {
+    background-color: white;
+    font-size: 20px;
+    margin-bottom: 10px;
+  }
+`;
+const BtnContainer = styled.div`
+  display: flex;
+  flex-wrap: wrap;
+  gap: 5px 5%; // 16*5 + 5*4 = 100, 가로 최대 5개
+`;
+const BtnComponent = styled.button`
+  width: 16%;
+  height: 30px;
+  border-radius: 5px;
+`;
 
 function ToDo({ text, category, id }: IToDo) {
   //const toDos = useRecoilValue(toDoState);
@@ -27,19 +50,21 @@ function ToDo({ text, category, id }: IToDo) {
     setToDos(deletedTodo);
   }
   return (
-    <li>
-      <span>{text}</span>
-      {allCategories.map((oneCategory) => {
-        if (category !== oneCategory) {
-          return (
-            <button key={oneCategory} name={oneCategory} onClick={onClick}>
-              {oneCategory}
-            </button>
-          );
-        }
-      })}
+    <ListComponent>
+      <div>{text}</div>
+      <BtnContainer>
+        {allCategories.map((oneCategory) => {
+          if (category !== oneCategory) {
+            return (
+              <BtnComponent key={oneCategory} name={oneCategory} onClick={onClick}>
+                {oneCategory}
+              </BtnComponent>
+            );
+          }
+        })}
+      </BtnContainer>
       <button onClick={deleteClick}>삭제</button>
-    </li>
+    </ListComponent>
   );
 }
 export default ToDo;
