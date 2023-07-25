@@ -1,8 +1,8 @@
 import { atom, selector } from "recoil";
 export enum Categories {
-  "TO_DO" = "TO_DO",
-  "DOING" = "DOING",
-  "DONE" = "DONE",
+  "TO_DO" = "할 일",
+  "DOING" = "하는 중",
+  "DONE" = "완료",
 }
 export interface IToDo {
   id: number;

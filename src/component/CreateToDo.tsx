@@ -9,13 +9,13 @@ function CreateToDo() {
   const { register, handleSubmit, setValue } = useForm<IForm>();
   const category = useRecoilValue(categoryState);
   const onSubmit = ({ toDo }: IForm) => {
-    setToDos((prev) => [{ id: Date.now(), text: toDo, category: category}, ...prev]);
+    setToDos((prev) => [{ id: Date.now(), text: toDo, category: category }, ...prev]);
     setValue("toDo", ""); //toDo input의 값을 지움
     //console.log(toDos);
   };
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
-      <input {...register("toDo")} placeholder="할 일을 작성핫요"></input>
+      <input {...register("toDo")} placeholder={`'${category}' 내용을 작성하세요`}></input>
       <button>추가</button>
     </form>
   );
