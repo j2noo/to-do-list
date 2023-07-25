@@ -2,10 +2,10 @@ import { styled } from "styled-components";
 import { Categories, allCategoryState, categoryState } from "../atoms";
 import { useRecoilState } from "recoil";
 
-const CategoryTab = styled.button<{ isSelected?: boolean }>`
+const CategoryTab = styled.button<{ $isSelected?: boolean }>`
   margin: 10px;
   padding: 10px;
-  color: ${(props) => (props.isSelected ? "red" : "blue")};
+  color: ${(props) => (props.$isSelected ? "red" : "blue")};
 `;
 
 function SelectTab() {
@@ -16,7 +16,15 @@ function SelectTab() {
   }
   function addClicked(event: React.MouseEvent<HTMLButtonElement>) {
     const newCategory = prompt("새로운 카테고리를 입력하세요");
-    setAllCategories((curr) => [...curr, newCategory as string]);
+    if (newCategory === null) {
+      return;
+    }
+    if (allCategories.includes(newCategory)) {
+      alert("이미 존재하는 카테고리 입니다!");
+      return;
+    }
+
+    setAllCategories((curr) => [...curr, newCategory]);
   }
 
   console.log(allCategories);
@@ -25,7 +33,7 @@ function SelectTab() {
       {allCategories.map((oneCategory) => (
         <CategoryTab
           key={oneCategory}
-          isSelected={category == oneCategory}
+          $isSelected={category == oneCategory}
           value={oneCategory}
           onClick={categoryClicked}
         >

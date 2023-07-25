@@ -28,7 +28,7 @@ function ToDo({ text, category, id }: IToDo) {
       {allCategories.map((oneCategory) => {
         if (category !== oneCategory) {
           return (
-            <button name={oneCategory} onClick={onClick}>
+            <button key={oneCategory} name={oneCategory} onClick={onClick}>
               {oneCategory}
             </button>
           );
