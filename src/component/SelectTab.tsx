@@ -27,7 +27,6 @@ function SelectTab() {
     setAllCategories((curr) => [...curr, newCategory]);
   }
 
-  console.log(allCategories);
   return (
     <>
       {allCategories.map((oneCategory) => (

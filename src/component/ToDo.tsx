@@ -1,9 +1,9 @@
-import { useRecoilValue, useSetRecoilState } from "recoil";
+import { useRecoilState, useRecoilValue, useSetRecoilState } from "recoil";
 import { Categories, IToDo, allCategoryState, toDoState } from "../atoms";
 
 function ToDo({ text, category, id }: IToDo) {
   //const toDos = useRecoilValue(toDoState);
-  const setToDos = useSetRecoilState(toDoState);
+  const [toDos, setToDos] = useRecoilState(toDoState);
   const allCategories = useRecoilValue(allCategoryState);
   const onClick = (event: React.MouseEvent<HTMLButtonElement>) => {
     const {
@@ -13,7 +13,6 @@ function ToDo({ text, category, id }: IToDo) {
 
     setToDos((oldToDos) => {
       const targetIndex = oldToDos.findIndex((toDo) => toDo.id === id);
-      console.log(targetIndex);
       const oldToDo = oldToDos[targetIndex];
       const newToDo = { text, id, category: name as any };
       //oldToDos[targetIndex].category = "DONE";
@@ -22,6 +21,11 @@ function ToDo({ text, category, id }: IToDo) {
       return [...oldToDos.slice(0, targetIndex), newToDo, ...oldToDos.slice(targetIndex + 1)];
     });
   };
+  function deleteClick(event: React.MouseEvent<HTMLButtonElement>) {
+    const targetIndex = toDos.findIndex((toDo) => toDo.id === id);
+    const deletedTodo = [...toDos.slice(0, targetIndex), ...toDos.slice(targetIndex + 1)];
+    setToDos(deletedTodo);
+  }
   return (
     <li>
       <span>{text}</span>
@@ -34,21 +38,7 @@ function ToDo({ text, category, id }: IToDo) {
           );
         }
       })}
-      {/* {category !== Categories.TO_DO && (
-        <button name={Categories.TO_DO + ""} onClick={onClick}>
-          To Do
-        </button>
-      )}
-      {category !== Categories.DOING && (
-        <button name={Categories.DOING + ""} onClick={onClick}>
-          Doing
-        </button>
-      )}
-      {category !== Categories.DONE && (
-        <button name={Categories.DONE + ""} onClick={onClick}>
-          Done
-        </button>
-      )} */}
+      <button onClick={deleteClick}>삭제</button>
     </li>
   );
 }
