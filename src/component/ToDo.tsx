@@ -24,6 +24,11 @@ function ToDo({ text, category, id }: IToDo) {
   return (
     <li>
       <span>{text}</span>
+      {category !== Categories.TO_DO && (
+        <button name={Categories.TO_DO + ""} onClick={onClick}>
+          To Do
+        </button>
+      )}
       {category !== Categories.DOING && (
         <button name={Categories.DOING + ""} onClick={onClick}>
           Doing
@@ -32,11 +37,6 @@ function ToDo({ text, category, id }: IToDo) {
       {category !== Categories.DONE && (
         <button name={Categories.DONE + ""} onClick={onClick}>
           Done
-        </button>
-      )}
-      {category !== Categories.TO_DO && (
-        <button name={Categories.TO_DO + ""} onClick={onClick}>
-          To Do
         </button>
       )}
     </li>
