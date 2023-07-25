@@ -1,25 +1,32 @@
-import { useState } from "react";
+import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import ToDo from "./ToDo";
 import CreateToDo from "./CreateToDo";
 import { useRecoilState, useRecoilValue } from "recoil";
 import { Categories, categoryState, toDoState, todoSelector } from "../atoms";
+import { styled } from "styled-components";
+import SelectTab from "./SelectTab";
 
+const Container = styled.div`
+  max-width: 500px;
+  background-color: #ecf0f1;
+  margin: auto;
+`;
+const Header = styled.h1`
+  text-align: center;
+  font-size: 30px;
+  padding: 30px;
+`;
 function ToDoList() {
   const toDos = useRecoilValue(todoSelector);
   const [category, setCategory] = useRecoilState(categoryState);
-  const onInput = (event: React.FormEvent<HTMLSelectElement>) => {
-    setCategory(event.currentTarget.value as any);
-  };
+
   return (
-    <div>
-      <h1>To Dos</h1>
+    <Container>
+      <Header>진우의 To-Do list</Header>
       <hr></hr>
-      <select value={category} onInput={onInput}>
-        <option value={Categories.TO_DO}>To Do</option>
-        <option value={Categories.DOING}>Doing</option>
-        <option value={Categories.DONE}>Done</option>
-      </select>
+      <SelectTab></SelectTab>
+
       <CreateToDo></CreateToDo>
       <ul>
         {toDos?.map((toDo) => (
@@ -27,7 +34,7 @@ function ToDoList() {
         ))}
       </ul>
       <hr></hr>
-    </div>
+    </Container>
   );
 }
 export default ToDoList;
