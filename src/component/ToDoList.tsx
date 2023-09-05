@@ -23,7 +23,7 @@ function ToDoList() {
 
   return (
     <Container>
-      <Header>진우의 To-Do list</Header>
+      <Header>진우의 To-Do list - Vercel! CI/CD!</Header>
       <hr></hr>
       <SelectTab></SelectTab>
 
