@@ -41,7 +41,7 @@ function SelectTab() {
       return;
     }
     if (allCategories.includes(newCategory)) {
-      alert("이미 존재하는 카테고리 입니다!");
+      alert("이미 존재하는 카테고리 입니다.");
       return;
     }
 
