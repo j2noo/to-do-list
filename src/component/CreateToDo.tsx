@@ -32,7 +32,7 @@ function CreateToDo() {
   };
   return (
     <FormComponent onSubmit={handleSubmit(onSubmit)}>
-      <InputComponent {...register("toDo")} placeholder={`'${category}' 내용을 작성하세요.`}></InputComponent>
+      <InputComponent {...register("toDo")} placeholder={`'${category}' 내용을 작성하세요..`}></InputComponent>
       <BtnComponent>추가</BtnComponent>
     </FormComponent>
   );
