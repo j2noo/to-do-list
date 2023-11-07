@@ -36,7 +36,7 @@ function SelectTab() {
     setCategory(event.currentTarget.value as Categories);
   }
   function addClicked(event: React.MouseEvent<HTMLButtonElement>) {
-    const newCategory = prompt("새로운 카테고리를 입력하세요.");
+    const newCategory = prompt("새로운 카테고리를 입력하세요..");
     if (newCategory === null) {
       return;
     }
